@@ -14,3 +14,16 @@ export async function getTeams(teams) {
   }
   return await res.json();
 }
+
+export async function getFutureGames(num) {
+  const url = `placeholder`;
+  let games = [];
+  const res = await setTimeout(function () {
+    () => {};
+  }, 500);
+
+  for (let i = 0; i < num; i++) {
+    games.push([`Team ${i * 2}`, `Team ${i * 2 + 1}`]);
+  }
+  return games;
+}
