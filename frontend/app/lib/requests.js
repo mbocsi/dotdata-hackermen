@@ -15,6 +15,11 @@ export async function getTeams(teams) {
   return await res.json();
 }
 
+/**
+ * Returns the predictions for the given teams
+ * @param {number} num- A list of teams in string format
+ * @returns {Array[Array]}- Array of team pairs
+ */
 export async function getFutureGames(num) {
   const url = `placeholder`;
   let games = [];
