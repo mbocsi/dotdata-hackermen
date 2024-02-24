@@ -1,0 +1,238 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+
+
+model standard{
+  TeamName String @id
+  MP_pt Int
+  Starts_pt Int
+  Min_pt Int
+  minPlayed_pt Float
+  Gls_P_perf Int
+  Ast_perf Int
+  G_A_perf Int
+  G_PK_perf Int
+  PK_perf Int
+  PKatt_perf Int
+  CrdY_perf Int
+  CrdR_perf Int
+  xG_exp Float
+  npxG_exp Float
+  xAG_exp Float
+  npxG_xAG_exp Float
+  PrgC Int
+  PrgP Int
+  Gls_ninety Float
+  Ast_ninety   Float
+  G_A_ninety Float
+  G_PK_ninety Float
+  G_A_PK_ninety Float
+  xG_ninety Float
+  xAG_ninety Float
+  xG_xAG_ninety Float
+  npxG_ninety Float
+  npxG_xAG_ninety Float
+}
+
+
+// model keeper{
+//   MP
+//   Starts
+//   Min
+//   90s
+//   GA
+//   GA90
+//   SoTA
+//   Saves
+//   Save%
+//   W
+//   D
+//   L
+//   CS
+//   CS%
+//   PKatt
+//   PKA
+//   PKsv
+//   PKm
+//   Save%
+// }
+
+// model keeper_adv{
+//   GA
+//   PKA
+//   FK
+//   CK
+//   OG
+//   PSxG
+//   PSxG/SoT
+//   PSxG+/-
+//   /90
+//   Cmp
+//   Att
+//   Cmp%
+//   Att (GK)
+//   Thr
+//   Launch%
+//   AvgLen
+//   Att
+//   Launch%
+//   AvgLen
+//   Opp
+//   Stp
+//   Stp%
+//   #OPA
+//   #OPA/90
+//   AvgDist
+// }
+
+// model shooting{
+//   Gls
+//   Sh
+//   SoT
+//   SoT%
+//   Sh/90
+//   SoT/90
+//   G/Sh
+//   G/SoT
+//   Dist
+//   FK
+//   PK
+//   PKatt
+//   xG
+//   npxG
+//   npxG/Sh
+//   G-xG
+//   np:G-xG
+// }
+
+// model passing{
+//   Cmp
+//   Att
+//   Cmp%
+//   TotDist
+//   PrgDist
+//   Cmp
+//   Att
+//   Cmp%
+//   Cmp
+//   Att
+//   Cmp%
+//   Cmp
+//   Att
+//   Cmp%
+//   xA
+//   A-xAG
+// }
+
+// model passing_types{
+//   Live
+//   Dead
+//   FK
+//   TB
+//   Sw
+//   Crs
+//   TI
+//   CK
+//   In
+//   Out
+//   Str
+//   Cmp
+//   Off
+//   Blocks
+// }
+
+// model goal_shot_creation{
+//   SCA
+//   SCA90
+//   PassLive
+//   PassDead
+//   TO
+//   Sh
+//   Fld
+//   Def
+//   GCA
+//   GCA90
+//   PassLive
+//   PassDead
+//   TO
+//   Sh
+//   Fld
+//   Def
+// }
+
+// model defense{
+//   Tkl
+//   TklW
+//   Def 3rd
+//   Mid 3rd
+//   Att 3rd
+//   Tkl
+//   Att
+//   Tkl%
+//   Lost
+//   Blocks
+//   Sh
+//   Pass
+// }
+
+// model possession{
+//   Touches
+//   Def Pen
+//   Def 3rd
+//   Mid 3rd
+//   Att 3rd
+//   Att Pen
+//   Live
+//   Att
+//   Succ
+//   Succ%
+//   Tkld
+//   Tkld%
+//   Carries
+//   TotDist
+//   PrgDist
+//   PrgC
+//   1/3
+//   CPA
+//   Mis
+//   Dis
+//   Rec
+//   PrgR
+// }
+
+// model playing_time{
+//   MP
+//   Min
+//   Mn/MP
+//   Min%
+//   90s
+//   Starts
+//   Mn/Start
+//   Compl
+//   Subs
+//   Mn/Sub
+//   unSub
+//   PPM
+//   onG
+//   onGA
+//   +/-
+//   +/-90
+//   onxG
+//   onxGA
+//   xG+/-
+//   xG+/-90
+// }
