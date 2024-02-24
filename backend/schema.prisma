@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-py"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model standard {
+  TeamName        String @id
+  MP_pt           Int
+  Starts_pt       Int
+  Min_pt          Int
+  minPlayed_pt    Float
+  Gls_P_perf      Int
+  Ast_perf        Int
+  G_A_perf        Int
+  G_PK_perf       Int
+  PK_perf         Int
+  PKatt_perf      Int
+  CrdY_perf       Int
+  CrdR_perf       Int
+  xG_exp          Float
+  npxG_exp        Float
+  xAG_exp         Float
+  npxG_xAG_exp    Float
+  PrgC            Int
+  PrgP            Int
+  Gls_ninety      Float
+  Ast_ninety      Float
+  G_A_ninety      Float
+  G_PK_ninety     Float
+  G_A_PK_ninety   Float
+  xG_ninety       Float
+  xAG_ninety      Float
+  xG_xAG_ninety   Float
+  npxG_ninety     Float
+  npxG_xAG_ninety Float
+}
