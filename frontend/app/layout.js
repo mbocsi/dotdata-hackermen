@@ -17,19 +17,26 @@ export default function RootLayout({ children }) {
         <div className="absolute flex flex-row w-full justify-between p-10">
           <Link
             href="/"
-            className="group rounded-lg border border-transparent px-5 py-3 transition-colors hover:border-gray-300 hover:bg-gray-300 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+            className="group rounded-lg border border-transparent px-5 py-3 transition hover:scale-110 ease-in-out delay-2000"
           >
-            <h2 className={`text-2xl font-semibold`}>Home</h2>
+            <Image
+              src="/PLhomeButton.png"
+              alt="PL Logo"
+              className="dark:invert"
+              width={80}
+              height={80}
+              priority
+            />
           </Link>
           <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
+            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0 transition hover:scale-110 ease-in-out delay-2000"
             href="https://www.premierleague.com/matchweek/12294/blog"
             target="_blank"
             rel="noopener noreferrer"
           >
             {" "}
             <Image
-              src="/Premier-League-logo.png"
+              src="/PLhomepage.png"
               alt="PL Logo"
               className="dark:invert"
               width={150}

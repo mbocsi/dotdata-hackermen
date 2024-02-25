@@ -24,6 +24,9 @@ async def repo():
         team_data[team]= await db.teams.find_unique(where={'TeamName': team}, include={'standard': True, 'possession': True, 'goalshot': True})
     await db.disconnect()
     res = scoreTeams(team_data)
+    total = sum([i for i in res.values()])
+    for i in res.keys():
+        res[i]/=total
     return jsonify(res)
 
 @app.route("/api/test", methods=['GET'])
