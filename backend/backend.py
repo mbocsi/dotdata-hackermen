@@ -8,14 +8,13 @@ from prisma import Prisma
 app = Flask(__name__)
 CORS(app)
 
-db = Prisma()
-
 @app.route("/hello", methods=['GET'])
 def hello_world():
     return "<p>Hello, World!</p>"
 
 @app.route("/api/getPrediction", methods=['GET'])
 async def repo():
+    db = Prisma()
     teams = request.args.get('teams')
     teams = json.loads(teams)
     await db.connect()
