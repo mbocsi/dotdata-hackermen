@@ -1,76 +1,479 @@
+"use client";
+
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+
+const teamLogo = {
+  "Manchester United": "/Manchester_United_FC_crest.png",
+  "Manchester City": "/Manchester_City_FC_badge.png",
+  "Liverpool FC": "/Liverpool_FC.png",
+  "Chelsea FC": "/Chelsea_FC.png",
+  "Tottenham Hotspur": "/Tottenham_Hotspur.png",
+  "Arsenal FC": "/Arsenal_FC.png",
+  "Wolverhampton Wanderers": "/Wolverhampton_Wanderers.png",
+  "Everton FC": "/Everton_FC.png",
+  "Newcastle United": "/Newcastle_United_Logo.png",
+  "Brentford FC": "/Brentford_FC_crest.png",
+  "West Ham": "/West_Ham_United_FC_logo.png",
+  "Nottingham Forest": "/Nottingham_Forest.png",
+  "Luton Town": "/Luton_Town.png",
+  "Crystal Palace": "/Crystal_Palace_FC.png",
+  Fulham: "/Fulham_FC.png",
+  Bournemouth: "/Bournemouth.png",
+  "Brighton Hove Albion": "/Brighton_Hove_Albion.png",
+  "Aston Villa": "/Aston_Villa.png",
+  "Sheffield United": "/Sheffield_United_FC.png",
+  "Burnley FC": "/Burnley_FC.png",
+};
 
 export default function Home() {
+  const [left_team, set_left_team] = useState(null);
+  const [right_team, set_right_team] = useState(null);
+
+  const resetSelection = () => {
+    set_left_team(null);
+    set_right_team(null);
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get predictions for future games 씨발&nbsp;
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://www.premierleague.com/matchweek/12294/blog"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {" "}
-            <Image
-              src="/Premier-League-logo.png"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={150}
-              height={30}
-              priority
-            />
-          </a>
-        </div>
+    <main className="flex min-h-screen flex-col items-center justify-between p-5">
+      <header className="w-full text-center font-mono text-sm pt-8 pb-6">
+        Get predictions for future games of Premier League by Selecting the
+        teams
+      </header>
+      <div className="flex flex-row justify-between items-center text-center">
+        <Image
+          src={teamLogo[left_team] || "/placeholder_for_left_team.png"}
+          alt="Left Team Logo"
+          className="mr-4"
+          width={150}
+          height={150}
+          priority
+        />
+
+        <span className="mx-4"> VS </span>
+
+        <Image
+          src={teamLogo[right_team] || "/placeholder_for_right_team.png"}
+          alt="Right Team Logo"
+          className="ml-4"
+          width={150}
+          height={150}
+          priority
+        />
       </div>
+
+      <button
+        className="mb-8 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition duration-300"
+        onClick={resetSelection}
+      >
+        Refresh
+      </button>
 
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
         <Image
           className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
           src="/Premier-League-logo-bg.png"
-          alt="Next.js Logo"
+          alt="PL Logo"
           width={500}
           height={100}
           priority
         />
       </div>
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-2 lg:text-left">
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      <div className="z-10 flex-grow p-4 w-full lg:flex items-center justify-between">
+        <div className="flex justify-center w-full bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:h-auto lg:bg-none gap-8">
+          {" "}
+          {/* Adjusted gap here */}
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Manchester United");
+              } else {
+                set_right_team("Manchester United");
+              }
+            }}
+          >
+            <Image
+              src="/Manchester_United_FC_crest.png"
+              alt="Manchester United"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Manchester City");
+              } else {
+                set_right_team("Manchester City");
+              }
+            }}
+          >
+            <Image
+              src="/Manchester_City_FC_badge.png"
+              alt="Manchester City"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Liverpool FC");
+              } else {
+                set_right_team("Liverpool FC");
+              }
+            }}
+          >
+            <Image
+              src="/Liverpool_FC.png"
+              alt="Liverpool FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Chelsea FC");
+              } else {
+                set_right_team("Chelsea FC");
+              }
+            }}
+          >
+            <Image
+              src="/Chelsea_FC.png"
+              alt="Chelsea FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Tottenham Hotspur");
+              } else {
+                set_right_team("Tottenham Hotspur");
+              }
+            }}
+          >
+            <Image
+              src="/Tottenham_Hotspur.png"
+              alt="Tottenham Hotspur"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Arsenal FC");
+              } else {
+                set_right_team("Arsenal FC");
+              }
+            }}
+          >
+            <Image
+              src="/Arsenal_FC.png"
+              alt="Arsenal FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Wolverhampton Wanderers");
+              } else {
+                set_right_team("Wolverhampton Wanderers");
+              }
+            }}
+          >
+            <Image
+              src="/Wolverhampton_Wanderers.png"
+              alt="Wolverhampton Wanderers"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Everton FC");
+              } else {
+                set_right_team("Everton FC");
+              }
+            }}
+          >
+            <Image
+              src="/Everton_FC.png"
+              alt="Everton FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Newcastle United");
+              } else {
+                set_right_team("Newcastle United");
+              }
+            }}
+          >
+            <Image
+              src="/Newcastle_United_Logo.png"
+              alt="Newcastle United"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Brentford FC");
+              } else {
+                set_right_team("Brentford FC");
+              }
+            }}
+          >
+            <Image
+              src="/Brentford_FC_crest.png"
+              alt="Brentford FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+        </div>
+      </div>
 
-        <a
-          href="https://www.wisc.edu/"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Test - Goes to UW webpage haha {" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Hello this is just a test 
-          </p>
-        </a>
-
+      <div className="z-10 flex-grow p-4 w-full lg:flex items-center justify-between">
+        <div className="flex justify-center w-full bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:h-auto lg:bg-none gap-8">
+          {" "}
+          {/* Adjusted gap here */}
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("West Ham");
+              } else {
+                set_right_team("West Ham");
+              }
+            }}
+          >
+            <Image
+              src="/West_Ham_United_FC_logo.png"
+              alt="West Ham United FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Nottingham Forest");
+              } else {
+                set_right_team("Nottingham Forest");
+              }
+            }}
+          >
+            <Image
+              src="/Nottingham_Forest.png"
+              alt="Nottingham Forest"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Luton Town");
+              } else {
+                set_right_team("Luton Town");
+              }
+            }}
+          >
+            <Image
+              src="/Luton_Town.png"
+              alt="Luton Town"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Crystal Palace");
+              } else {
+                set_right_team("Crystal Palace");
+              }
+            }}
+          >
+            <Image
+              src="/Crystal_Palace_FC.png"
+              alt="Crystal Palace FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Fulham");
+              } else {
+                set_right_team("Fulham");
+              }
+            }}
+          >
+            <Image
+              src="/Fulham_FC.png"
+              alt="Fulham FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Bournemouth");
+              } else {
+                set_right_team("Bournemouth");
+              }
+            }}
+          >
+            <Image
+              src="/Bournemouth.png"
+              alt="Bournemouth"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Brighton Hove Albion");
+              } else {
+                set_right_team("Brighton Hove Albion");
+              }
+            }}
+          >
+            <Image
+              src="/Brighton_Hove_Albion.png"
+              alt="Brighton Hove Albion"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Aston Villa");
+              } else {
+                set_right_team("Aston Villa");
+              }
+            }}
+          >
+            <Image
+              src="/Aston_Villa.png"
+              alt="Aston Villa"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Sheffield United");
+              } else {
+                set_right_team("Sheffield United");
+              }
+            }}
+          >
+            <Image
+              src="/Sheffield_United_FC.png"
+              alt="Sheffield United FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+          <button
+            className="pointer-events-none flex place-items-center p-8 lg:pointer-events-auto lg:p-0"
+            onClick={() => {
+              if (teamLogo[left_team] == null) {
+                set_left_team("Burnley FC");
+              } else {
+                set_right_team("Burnley FC");
+              }
+            }}
+          >
+            <Image
+              src="/Burnley_FC.png"
+              alt="Burnley FC"
+              className=""
+              width={80}
+              height={80}
+              priority
+            />
+          </button>
+        </div>
       </div>
     </main>
   );
