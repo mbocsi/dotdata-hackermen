@@ -1,3 +1,4 @@
+import prisma from "@/prisma/db";
 /**
  * Returns the predictions for the given teams
  * @param {Array} teams- A list of teams in string format
@@ -16,7 +17,7 @@ export async function getTeams(teams) {
 }
 
 /**
- * Returns the predictions for the given teams
+ * Returns the future games
  * @param {number} num- A list of teams in string format
  * @returns {Array[Array]}- Array of team pairs
  */
@@ -31,4 +32,19 @@ export async function getFutureGames(num) {
     games.push([`Team ${i * 2}`, `Team ${i * 2 + 1}`]);
   }
   return games;
+}
+/**
+ * Returns the predictions for the given teams
+ * @returns all the teams
+ */
+export async function getAllTeams() {
+  prisma.$connect();
+  const items = await prisma.standard.findAll({
+    where: {},
+    select: {
+      TeamName: true,
+    },
+  });
+  prisma.$disconnect();
+  return items;
 }
