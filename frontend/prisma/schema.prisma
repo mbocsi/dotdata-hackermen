@@ -1,0 +1,68 @@
+generator client {
+  provider             = "prisma-client-py"
+  recursive_type_depth = "5"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model standard {
+  TeamName        String @id
+  MP_pt           Int
+  Starts_pt       Int
+  Min_pt          Int
+  minPlayed_pt    Float
+  Gls_P_perf      Int
+  Ast_perf        Int
+  G_A_perf        Int
+  G_PK_perf       Int
+  PK_perf         Int
+  PKatt_perf      Int
+  CrdY_perf       Int
+  CrdR_perf       Int
+  xG_exp          Float
+  npxG_exp        Float
+  xAG_exp         Float
+  npxG_xAG_exp    Float
+  PrgC            Int
+  PrgP            Int
+  Gls_ninety      Float
+  Ast_ninety      Float
+  G_A_ninety      Float
+  G_PK_ninety     Float
+  G_A_PK_ninety   Float
+  xG_ninety       Float
+  xAG_ninety      Float
+  xG_xAG_ninety   Float
+  npxG_ninety     Float
+  npxG_xAG_ninety Float
+}
+
+model possession{
+  TeamName        String @id
+  Touches_T Int
+  Def_Pen_T Int
+  Def_3rd_T Int
+  Mid_3rd_T Int
+  Att_3rd_T Int
+  Att_Pen_T Int
+  Live_T Int
+  Att_TO Int
+  Succ_TO Int
+  Succ_Per_TO Float
+  Tkld_TO Int
+  Tkld_Per_TO Float
+  Carries_C Int
+  TotDist_C Int
+  PrgDist_C Int
+  PrgC_C Int
+  third_C Int
+  CPA_C Int
+  Mis_C Int
+  Dis_C Int
+  Rec_R Int
+  PrgR_R Int
+}
