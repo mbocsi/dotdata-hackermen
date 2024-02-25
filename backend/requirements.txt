@@ -4,3 +4,5 @@ prisma
 pandas
 soccerdata
 tabulate
+bs4
+flask[async]
