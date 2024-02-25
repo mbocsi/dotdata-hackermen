@@ -21,7 +21,7 @@ async def repo():
     await db.connect()
     team_data = {}
     for team in teams:
-        team_data[team]= await db.standard.find_unique(where={'TeamName': team})
+        team_data[team]= await db.teams.find_unique(where={'TeamName': team}, include={'standard': True, 'possession': True, 'goalshot': True})
     await db.disconnect()
     res = scoreTeams(team_data)
     return jsonify(res)
@@ -30,7 +30,7 @@ async def repo():
 def repodata():
     return f"<p>Test<p>"
 
-weights = {'MP_pt': 0,
+standard_weights = {'MP_pt': 0,
   'Starts_pt': 0,
   'Min_pt': 0,
   'minPlayed_pt': 0,
@@ -59,19 +59,67 @@ weights = {'MP_pt': 0,
   'npxG_ninety': 0.5,
   'npxG_xAG_ninety': 0.5
 }
-TOTAL_WEIGHT = sum([i for i in weights.values()])
+possession_weights = {'Touches_T': 0,
+  'Def_Pen_T': 0,
+  'Def_3rd_T' : 0,
+  'Mid_3rd_T' : 0,
+  'Att_3rd_T' : 0,
+  'Att_Pen_T' : 0,
+  'Live_T': 0,
+  'Att_TO' : 0,
+  'Succ_TO' : 0,
+  'Succ_Per_TO' : 0,
+  'Tkld_TO' : 0,
+  'Tkld_Per_TO' : 0,
+  'Carries_C': 0,
+  'TotDist_C': 0,
+  'PrgDist_C' : 0,
+  'PrgC_C' : 0,
+  'third_C' : 0,
+  'CPA_C' : 0,
+  'Mis_C': 0,
+  'Dis_C' : 0,
+  'Rec_R' : 0,
+  'PrgR_R' : 0,
+}
+goalshots_weights = {'SCA_ST': 0,
+  'SCA90_ST': 0,
+  'PassLive_ST': 0,
+  'PassDead_ST': 0,
+  'TO_ST': 0,
+  'Sh_ST': 0,
+  'Fld_ST': 0,
+  'Def_ST': 0,
+  'GCA_G': 0,
+  'GCA90_G': 0,
+  'PassLive_GT': 0,
+  'PassDead_GT': 0,
+  'TO_GT': 0,
+  'Sh_GT': 0,
+  'Fld_GT': 0,
+  'Def_GT': 0,}
+TOTAL_WEIGHT = sum([i for i in (list(standard_weights.values()) + list(possession_weights.values()) + list(goalshots_weights.values())) if i >= 0])
 
-def scoreTeams(team_data):
-    result = {i: 0 for i in team_data.keys()}
-    print(result)
-    team_names = []
-    for b in zip(*[i for i in team_data.values()]):
-        if b[0][0] == 'TeamName':
-            team_names = [i[1] for i in b]
-            continue
-        maxScore = max(*[j[1] for j in b])
-        for i in range(len(b)):
-            result[team_names[i]] += weights[b[i][0]] * (b[i][1] / maxScore)
+def scoreTeams(data):
+    result = {i: 0 for i in data.keys()}
+    tables = ['standard', 'possession', 'goalshot']
+    team_names = [i for i in data.keys()]
+    for table in tables:
+        weights = {}
+        match table:
+            case 'standard':
+                weights =  standard_weights
+            case 'possession':
+                weights = possession_weights
+            case 'goalshot':
+                weights = goalshots_weights
+        for t in zip(*[getattr(i, table) for i in data.values()]):
+            for b in zip(*[i for i in t]):
+                if b[0][0] == 'TeamName' or b[0][0] == 'teamRel':
+                    continue
+                maxScore = max(*[j[1] for j in b])
+                for i in range(len(b)):
+                    result[team_names[i]] += weights[b[i][0]] * (b[i][1] / maxScore)
     for i in result.keys():
         result[i]/=TOTAL_WEIGHT
     return result
